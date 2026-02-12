@@ -34,7 +34,7 @@ def helper(doc):
 #function to insert data
 @app.post("/test/insert")
 async def data_insert(data: TestData):
-    result = await collection.insert_one(data.dict())
+    result = await collection.insert_one(data.model_dump())
     return {"message" : "data inserted successfully"}
 
 
@@ -45,4 +45,4 @@ async def get_collection():
     cursor = collection.find({})
     async for document in cursor:
         items.append(helper(document))
-    return itemsS
+    return items
